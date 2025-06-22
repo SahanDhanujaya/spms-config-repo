@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: vehicle-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/vehicle-service/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
