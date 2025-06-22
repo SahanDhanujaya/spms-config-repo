@@ -1,17 +1,10 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
     name: api-gateway
-  config:
-    import: optional:configserver:http://localhost:8888
-  jackson:
-    serialization:
-      fail-on-empty-beans: false
-  cloud:
-    compatibility-verifier:
-      enabled: false
+
     gateway:
       server:
         webflux:
